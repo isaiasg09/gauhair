@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600;1,700&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .font-display {
+    font-family: 'Oswald', sans-serif !important;
+  }
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: #0B0B0C;
+    color: #F2EEE6;
+    overflow-x: hidden;
+  }
+
+  /* Custom Industrial Scrollbar */
+  ::-webkit-scrollbar {
+    width: 7px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0B0B0C;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2A2B2F;
+    border-radius: 2px;
+    border: 1px solid rgba(212, 162, 76, 0.2);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #D4A24C;
+  }
+}
+
+/* Background Noise overlay */
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+/* Barber pole animated stripe pattern */
+@keyframes barberPole {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 56px 0;
+  }
+}
+
+.animate-barber-pole {
+  background: repeating-linear-gradient(
+    -45deg,
+    #B8452A,
+    #B8452A 14px,
+    #F2EEE6 14px,
+    #F2EEE6 28px,
+    #2F5D50 28px,
+    #2F5D50 42px,
+    #F2EEE6 42px,
+    #F2EEE6 56px
+  );
+  background-size: 56px 56px;
+  animation: barberPole 2.5s linear infinite;
+}
+
+/* Amber pulse glow */
+@keyframes amberGlowPulse {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(212, 162, 76, 0.3), 0 0 35px rgba(212, 162, 76, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(212, 162, 76, 0.6), 0 0 50px rgba(212, 162, 76, 0.3);
+  }
+}
+
+.glow-pulse {
+  animation: amberGlowPulse 2.8s ease-in-out infinite;
+}
+
+/* Light sweep on hover */
+.shine-sweep {
+  position: relative;
+  overflow: hidden;
+}
+.shine-sweep::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent,
+    rgba(255, 255, 255, 0.18),
+    transparent
+  );
+  transform: translateX(-100%);
+  transition: transform 0.65s ease;
+}
+.shine-sweep:hover::after {
+  transform: translateX(100%);
+}
+
+/* Marquee continuous scroll */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
